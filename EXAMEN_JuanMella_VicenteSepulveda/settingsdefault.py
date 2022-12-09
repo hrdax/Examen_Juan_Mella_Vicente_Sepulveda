@@ -77,9 +77,10 @@ WSGI_APPLICATION = 'EXAMEN_JuanMella_VicenteSepulveda.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #NOMBRE BASE DE DATOS
         'NAME': 'Rau',
         'USER': 'postgres',
-        'PASSWORD': '#tucontrasena',
+        'PASSWORD': '#tucontrasenaBD',
         'HOST': '127.0.0.1',
         'DATABASE_PORT': '5432',
     }
