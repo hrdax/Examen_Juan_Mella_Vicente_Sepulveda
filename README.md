@@ -15,3 +15,9 @@ Cambiar de nombre settingsdefault.py a settings.py
 Cambiar contrasena de la base de datos por la del usuario actual
 
 cambiar nombre de base de datos o crear una base de datos llamada "Rau"
+
+migrar el modelo con
+
+1. python manage.py makemigrations
+
+2. python manage.py migrate
