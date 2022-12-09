@@ -100,34 +100,32 @@
         <!-- desde aqui se pone lo demas formulario, vistas, etc. para que no quede invisible -->
         <div class="container">
             <h1>Gestion de usuario</h1>
-            <h2>Crear Cliente</h2>
+            <h2>Modificar Cliente</h2>
 
         
-            <form action="{% url 'crearcliente' %}" method="POST">
+            <form action="{% url 'modificarcliente' %}" method="POST">
                 {% csrf_token %}
-                <div>   
-                    <label for="">Rut</label>
-                    <br>
-                    <input type="text" id="rutid" name="rutid">
-                </div>
+
+                <input type="text" id="rutid" name="rutid" value="{{ cliente.Rut }}" hidden="True">
 
                 <div>
                     <br>
-                        <label for="">Nombre</label>
+                        <label for="nombreid">Nombre</label>
                     <br>
-                    <input type="text" id="nombreid" name="nombreid">
+                    <input type="text" id="nombreid" name="nombreid" value="{{ cliente.Nombre }}">
                 </div>
                 <br>
                 <div>
-                    <label for="">Apellido</label>
+                    <label for="apellidoid">Apellido</label>
                     <br>
-                    <input type="text" id="apellidoid" name="apellidoid">
+                    <input type="text" id="apellidoid" name="apellidoid" value="{{ cliente.Apellido }}">
                 </div>
 
                 <br>
                 <div>
                     <label for="sectorid">Sector</label>
                     <select name="sectorid" id="sectorid">
+                    <option selected disabled>{{cliente.sector}}</option>
                     {% for sectores in sector %}
                     <option> {{ sectores }} </option>
                     {%endfor%}
@@ -138,7 +136,8 @@
                 <div>
                     <label for="estadoid">Estado</label>
             
-                    <select name="estadoid" id="sectorid">
+                    <select name="estadoid" id="sectorid" value="">
+                    <option selected disabled>{{cliente.estado}}</option>
                     {% for estado in estado %}
                     <option> {{ estado }} </option>
                     {%endfor%}
@@ -146,7 +145,7 @@
                     </select>
                 </div>
                 <br>
-                <input type="submit" value="Ingresar" id="ingresarbtn">
+                <input type="submit" value="Modificar" id="ingresarbtn">
             </form>
         </div>
 

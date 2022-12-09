@@ -1,3 +1,4 @@
+
 {% load static %}
 <html lang="en">
 
@@ -21,9 +22,8 @@
     <link href="{% static 'css/sb-admin-2.min.css'%}" rel="stylesheet">
 
 </head>
-<body>
 
-
+<body id="page-top">
     <!-- dashboard -->
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -97,60 +97,62 @@
 
         </ul>
 
-        <!-- desde aqui se pone lo demas formulario, vistas, etc. para que no quede invisible -->
-        <div class="container">
-            <h1>Gestion de usuario</h1>
-            <h2>Crear Cliente</h2>
-
         
-            <form action="{% url 'crearcliente' %}" method="POST">
+
+        <div class="card-body">
+            <h1>Listado de clientes</h1>
+            <form action="{% url 'filtrarall' %}" method="POST">
                 {% csrf_token %}
-                <div>   
-                    <label for="">Rut</label>
-                    <br>
-                    <input type="text" id="rutid" name="rutid">
-                </div>
 
-                <div>
-                    <br>
-                        <label for="">Nombre</label>
-                    <br>
-                    <input type="text" id="nombreid" name="nombreid">
-                </div>
-                <br>
-                <div>
-                    <label for="">Apellido</label>
-                    <br>
-                    <input type="text" id="apellidoid" name="apellidoid">
-                </div>
-
-                <br>
-                <div>
-                    <label for="sectorid">Sector</label>
-                    <select name="sectorid" id="sectorid">
-                    {% for sectores in sector %}
-                    <option> {{ sectores }} </option>
-                    {%endfor%}
-                    
-                    </select>
-                </div>
-                <br>
-                <div>
-                    <label for="estadoid">Estado</label>
-            
-                    <select name="estadoid" id="sectorid">
-                    {% for estado in estado %}
-                    <option> {{ estado }} </option>
-                    {%endfor%}
+                <label for="sectorid">Filtro Sector</label>
+                <select name="sectorid" id="sectorid">
+                <option selected>Cualquier Sector</option>
+                {% for sectores in sector %}
+                <option> {{ sectores }} </option>
+                {%endfor%}
                 
-                    </select>
-                </div>
-                <br>
-                <input type="submit" value="Ingresar" id="ingresarbtn">
+                </select>
+                
+                <label for="estadoid">Filtro estado</label>
+                <select name="estadoid" id="estadoid">
+                <option selected>Cualquier Estado</option>
+                {% for estados in estado %}
+                <option> {{ estados }} </option>
+                {%endfor%}
+                
+                </select>
+                
+                <button type="submit" class="btn btn-secondary">Filtrar</button>
+
             </form>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Rut</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Sector</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for clientes in clientes %}
+                        <tr>
+                        <td>{{ clientes.Rut }}</td>
+                        <td>{{ clientes.Nombre }}</td>
+                        <td>{{ clientes.Apellido }}</td>
+                        <td>{{ clientes.sector }}</td>
+                        <td>{{ clientes.estado }}</td>
+                        <td><a href="{% url 'vmodificarcliente' %}?rut={{ clientes.Rut }}"><button class="btn btn-secondary">Modificar</button></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
 
     </div>
     <!-- FIN dashboard -->
+
 </body>
+
 </html>
