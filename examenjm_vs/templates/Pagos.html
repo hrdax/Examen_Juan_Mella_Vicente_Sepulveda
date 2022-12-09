@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{% static 'css/sb-admin-2.min.css'%}" rel="stylesheet">
+    <link href="{% static 'css/styles.css'%}" rel="stylesheet">
 
 </head>
 
@@ -108,37 +109,40 @@
 
         </ul>
 
-        
         <div class="container">
-            <h1>Gestion de Pagos</h1>
+            <div class="contenedor">
+                
+
+
+                <form action="{% url 'webpay' %}" method="POST">
+                    {% csrf_token %}
+                    <h1>Gestion de Pagos</h1>
         
-            <h2>Pagar Cliente</h2>
+                    <h2>Pagar Cliente</h2>
+                    <div>
+                        <label for="rutid">Rut</label>
+                        <select name="rutid" id="rutid">
+                        {% for rut in ruts %}
+                        <option> {{ rut.Rut }} </option>
+                        {%endfor%}
+                        
+                        </select>
+                    </div>
 
-
-            <form action="{% url 'webpay' %}" method="POST">
-                {% csrf_token %}
-                <div>
-                    <label for="rutid">Rut</label>
-                    <select name="rutid" id="rutid">
-                    {% for rut in ruts %}
-                    <option> {{ rut.Rut }} </option>
-                    {%endfor%}
-                    
-                    </select>
-                </div>
-
-                <div>
+                    <div>
+                        <br>
+                            <label for="tpago">Total pago</label>
+                        <br>
+                        <p>$<input type="number" id="tpago" name="tpago"></p>
+                    </div>
                     <br>
-                        <label for="tpago">Total pago</label>
+                    <input type="submit" value="Realizar Pago" id="ingresarbtn" class="btn btn-secondary">
                     <br>
-                    <p>$<input type="number" id="tpago" name="tpago"></p>
-                </div>
-                <br>
-                <input type="submit" value="Realizar Pago" id="ingresarbtn" class="btn btn-secondary">
-                <br>
-                <img src="{% static 'img/webpay.png'%}">
-            </form>
+                    <img src="{% static 'img/webpay.png'%}">
+                </form>
+            </div>
         </div>
+        
 
     </div>
     <!-- FIN dashboard -->
