@@ -40,3 +40,7 @@ def verclientes_activos(request):
     clientes = Cliente.objects.all().filter(estado="activo")
     return render(request, "listadoclientes.html",{"clientes":clientes})
     
+def verclientes_inactivos(request):
+    clientes = Cliente.objects.all().filter(estado="inactivo")
+    return render(request, "listadoclientes.html",{"clientes":clientes})
+    
