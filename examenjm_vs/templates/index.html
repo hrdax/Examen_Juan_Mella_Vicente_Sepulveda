@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,53 +8,54 @@
 </head>
 <body>
     <h1>Gestion de usuario</h1>
+
+
+    <form action="{% url 'crearcliente' %}" method="POST">
+        {% csrf_token %}
        <div>
             
             <label for="">Rut</label>
             <br>
-            <input type="text" id="nombreid">
+            <input type="text" id="rutid" name="rutid">
         </div>
 
         <div>
             <br>
     <label for="">Nombre</label>
     <br>
-    <input type="text" id="nombreid">
+    <input type="text" id="nombreid" name="nombreid">
 </div>
 <br>
 <div>
     <label for="">Apellido</label>
 <br>
-<input type="text" id="apellidoid">
+<input type="text" id="apellidoid" name="apellidoid">
 </div>
 
 <br>
 <div>
-    <label for="">Sector</label>
-    <select name="" id="sectorid">
-        <option value="Colbún">Colbún</option>
-        <option value="Panimávida">Panimávida</option>
-        <option value="Maule Sur">Maule Sur</option>
-        <option value="La Guardia">La Guardia</option>
-        <option value="San Nicolas">San Nicolas</option>
-        <option value="Quinamavida">Quinamavida</option>
-        <option value="Maule Sur">Rarii</option>
-        <option value="Capilla Palacio">Capilla Palacio</option>
+    <label for="sectorid">Sector</label>
+    <select name="sectorid" id="sectorid">
+        {% for sectores in sector %}
+        <option> {{ sectores }} </option>
+        {%endfor%}
         
     </select>
 </div>
 <br>
 <div>
-    <label for="">Estado</label>
+    <label for="estadoid">Estado</label>
    
-    <select name="" id="sectorid">
-        <option value="Activo">Activo</option>
-        <option value="Inactivo">Inactivo</option>
-      
+    <select name="estadoid" id="sectorid">
+        {% for estado in estado %}
+        <option> {{ estado }} </option>
+        {%endfor%}
+       
     </select>
 </div>
-
-
+<br>
+<input type="submit" value="Ingresar" id="ingresarbtn">
+</form>
 
 </body>
 </html>
