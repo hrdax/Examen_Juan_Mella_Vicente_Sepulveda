@@ -1,6 +1,9 @@
 from django.urls import path
-from . import views
+from .import views
 
 urlpatterns = [
-    path('', views.index, name='index')
+    path('filtrosectores', views.filtrosectores, name='filtrosectores'),
+    path('index', views.index, name='index'),
+    path('crearcliente', views.crearcliente, name='crearcliente'),
+
 ]
