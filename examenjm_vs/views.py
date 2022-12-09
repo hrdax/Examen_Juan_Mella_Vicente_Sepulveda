@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from examenjm_vs.models import *
+from random import randint
+from transbank.webpay.webpay_plus.transaction import Transaction
 
 # Create your views here.
 
@@ -161,11 +163,23 @@ def filtrarall(request):
         return render(request, "Verclientes.html",{"clientes":clientes,"sector":sectores,"estado":estados})
 
 def Pagos(request):
+    #hace un select a todos los clientes
     clientes = Cliente.objects.all()
+    #envia todos los clientes al spinner de pago
     return render(request, "Pagos.html",{"ruts":clientes})
 
+#crea la transaccion y redirige en caso de exito
 def webpay(request):
+    #obtiene el rut y el monto a pagar
+    pago = request.POST['tpago']
+    rutapagar = request.POST['rutid']
+    #crea la transaccion
+    resp = (Transaction()).create(str(randint(10,100000)), str(randint(10,100000)), float(pago), "http://localhost:8000/examenjm_vs/transaccioncompleta")
 
-    
+    #redirige a confirmar pago donde evia el monto a pagar tambien la url y el token devuelto por parte de transbank
+    return render(request, "confirmarpago.html",{"token":resp['token'], "url":resp['url'], "rut":rutapagar, "pago":pago})
 
-    return render(request, "webpay.html")
+#redirige a la pagina de pago realizado en caso de se haya hecho el pago con un N de transaccion aleatorio
+def transaccioncompleta(request):
+
+    return render(request, "pagorealizado.html",{ "TBK_NUM_TRANSACCION": randint(30,1000000)})
