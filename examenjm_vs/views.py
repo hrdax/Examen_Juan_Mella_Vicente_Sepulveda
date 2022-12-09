@@ -2,13 +2,21 @@ from django.shortcuts import render
 from examenjm_vs.models import *
 
 # Create your views here.
-
+# NO TOCAR INDEX
 def index(request):
     return render(request, 'dashboard.html')
 
 def vcrearcliente(request):
-
-    return render(request, 'vcrearcliente.html')
+    sectores=["Colbún"
+        ,"Panimávida"
+        ,"Maule Sur"
+        ,"La Guardia"
+        ,"San Nicolas"
+        ,"Quinamavida"
+        ,"Rari",
+        "Capilla Palacio"]
+    estados=["activo","inactivo"]
+    return render(request, 'vcrearcliente.html',{"sector":sectores,"estado":estados})
 
 def filtrosectores(request):
     return render(request, 'filtroporsectores.html')
