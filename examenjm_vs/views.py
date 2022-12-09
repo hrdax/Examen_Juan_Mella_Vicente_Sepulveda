@@ -160,4 +160,12 @@ def filtrarall(request):
         clientes = Cliente.objects.all().filter(sector=sectorse,estado=estadose)
         return render(request, "Verclientes.html",{"clientes":clientes,"sector":sectores,"estado":estados})
 
- 
+def Pagos(request):
+    clientes = Cliente.objects.all()
+    return render(request, "Pagos.html",{"ruts":clientes})
+
+def webpay(request):
+
+    
+
+    return render(request, "webpay.html")
