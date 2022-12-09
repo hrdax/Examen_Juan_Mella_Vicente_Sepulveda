@@ -4,6 +4,7 @@ Examen django
 Requerimientos
 
 pip install transbank-sdk
+
 pip install psycopg2
 
 si hay problemas de path, se puede utilizar pycharm, ir a la configuracion de pycharm, PROJECT:EXAMEN_JuanM... luego en Python Interpreter.
