@@ -9,5 +9,9 @@ urlpatterns = [
     path('listadoclientes', views.verclientes, name='verclientes'),
     path('listadoclientes_ac', views.verclientes_activos, name='verclientes_ac'),
     path('listadoclientes_inac', views.verclientes_inactivos, name='verclientes_inac'),
-    
+    path('vmodificarcliente', views.vmodificarcliente, name='vmodificarcliente'),
+    path('modificarcliente', views.modificarcliente, name='modificarcliente'),
+    path('filtrarsector', views.filtrarsector, name='filtrarsector'),
+    path('verallclientes', views.verallclientes, name='verallclientes'),
+    path('filtrarall', views.filtrarall, name='filtrarall'),
 ]
