@@ -8,5 +8,6 @@ urlpatterns = [
     path('vcrearcliente', views.vcrearcliente, name='vcrearcliente'),
     path('listadoclientes', views.verclientes, name='verclientes'),
     path('listadoclientes_ac', views.verclientes_activos, name='verclientes_ac'),
+    path('listadoclientes_inac', views.verclientes_inactivos, name='verclientes_inac'),
     
 ]
