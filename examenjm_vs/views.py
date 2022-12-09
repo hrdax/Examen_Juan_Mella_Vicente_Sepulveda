@@ -20,3 +20,11 @@ def crearcliente(request):
    clientenew.save()
    return render(request,'index.html')
 
+ 
+def verclientes(request):
+    clientes = Cliente.objects.all
+    return render(request, "listadoclientes.html",{"clientes":clientes})
+
+def verclientes_activos(request):
+    clientes = Cliente.objects.all().filter(estado="activo")
+    return render(request, "listadoclientes.html",{"clientes":clientes})
