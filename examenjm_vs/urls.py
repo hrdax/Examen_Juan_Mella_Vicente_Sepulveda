@@ -14,4 +14,7 @@ urlpatterns = [
     path('filtrarsector', views.filtrarsector, name='filtrarsector'),
     path('verallclientes', views.verallclientes, name='verallclientes'),
     path('filtrarall', views.filtrarall, name='filtrarall'),
+    path('Pagos', views.Pagos, name='Pagos'),
+    path('webpay', views.webpay, name='webpay'),
+    path('transaccioncompleta', views.transaccioncompleta, name='transaccioncompleta'),
 ]
