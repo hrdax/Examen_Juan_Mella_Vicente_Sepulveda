@@ -95,11 +95,11 @@ def filtrarsector(request):
     try:
         sector = request.POST['sectorid']
         clientes = Cliente.objects.all().filter(sector=sector,estado=estado)
-        return render(request, "listadoclientes.html",{"clientes":clientes,"sector":sectores,"estado":estados})
+        return render(request, "listadoclientes.html",{"clientes":clientes,"sector":sectores,"estado":estado})
     except:
         
         clientes = Cliente.objects.all().filter(estado=estado)
-        return render(request, "listadoclientes.html",{"clientes":clientes,"sector":sectores,"estado":estados})
+        return render(request, "listadoclientes.html",{"clientes":clientes,"sector":sectores,"estado":estado})
 
     
     
