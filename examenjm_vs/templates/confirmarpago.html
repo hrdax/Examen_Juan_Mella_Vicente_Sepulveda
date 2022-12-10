@@ -23,90 +23,72 @@
 
 </head>
 
-<!-- dashboard -->
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+        <!-- dashboard -->
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+    
+            <!-- Sidebar -->
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'clientedashboard'%}?user={{user}}">
+                    <div class="sidebar-brand-icon rotate-n-15">
+                        <i class="fas fa-laugh-wink"></i>
+                    </div>
+                    <div class="sidebar-brand-text mx-3">ExamenJMVS</div>
+                </a>
+    
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0">
+    
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'clientedashboard'%}?user={{user}}">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
+                </li>
+    
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+    
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Interface
+                </div>
+    
+                <hr class="sidebar-divider">
+    
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'VerCuentas' %}?user={{user}}">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Ver Cuentas</span>
+                    </a>
+                </li>
+    
+                <hr class="sidebar-divider">
+    
+                <li class="nav-item">
+                    <!-- cambiar ver clientes inactivos -->
+                    <a class="nav-link" href="{% url 'HistorialPagos' %}?user={{user}}">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Historial Pagos</span>
+                    </a>
+                </li>
 
-      <!-- Sidebar -->
-      <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-          <!-- Sidebar - Brand -->
-          <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'index'%}">
-              <div class="sidebar-brand-icon rotate-n-15">
-                  <i class="fas fa-laugh-wink"></i>
-              </div>
-              <div class="sidebar-brand-text mx-3">ExamenJMVS</div>
-          </a>
-
-          <!-- Divider -->
-          <hr class="sidebar-divider my-0">
-
-          <!-- Nav Item - Dashboard -->
-          <li class="nav-item active">
-              <a class="nav-link" href="{% url 'index'%}">
-                  <i class="fas fa-fw fa-tachometer-alt"></i>
-                  <span>Dashboard</span></a>
-          </li>
-
-          <!-- Divider -->
-          <hr class="sidebar-divider">
-
-          <!-- Heading -->
-          <div class="sidebar-heading">
-              Interface
-          </div>
-
-          <!-- Nav Item - Pages Collapse Menu -->
-          <li class="nav-item">
-              <!--Aqui le pones la url en href-->
-              <a class="nav-link" href="{% url 'vcrearcliente' %}">
-                  <i class="fas fa-fw fa-cog"></i>
-                  <span>Crear cliente</span>
-              </a>
-          </li>
-
-
-          <hr class="sidebar-divider">
-
-          <!-- Nav Item - Pages Collapse Menu -->
-          <li class="nav-item">
-              <a class="nav-link" href="{% url 'verallclientes' %}">
-                  <i class="fas fa-fw fa-cog"></i>
-                  <span>Ver todos los clientes</span>
-              </a>
-          </li>
-
-          <hr class="sidebar-divider">
-
-          <!-- Nav Item - Pages Collapse Menu -->
-          <li class="nav-item">
-              <a class="nav-link" href="{% url 'verclientes_ac' %}">
-                  <i class="fas fa-fw fa-cog"></i>
-                  <span>Ver clientes activos</span>
-              </a>
-          </li>
-
-          <hr class="sidebar-divider">
-
-          <li class="nav-item">
-              <!-- cambiar ver clientes inactivos -->
-              <a class="nav-link" href="{% url 'verclientes_inac' %}">
-                  <i class="fas fa-fw fa-cog"></i>
-                  <span>Ver clientes inactivos</span>
-              </a>
-          </li>
-
-          <hr class="sidebar-divider">
-
-          <li class="nav-item">
-              <!-- cambiar ver clientes inactivos -->
-              <a class="nav-link" href="{% url 'Pagos' %}">
-                  <i class="fas fa-fw fa-cog"></i>
-                  <span>Metodos de pago</span>
-              </a>
-          </li>
-
-      </ul>
+                <hr class="sidebar-divider">
+    
+                <li class="nav-item">
+                    <!-- cambiar ver clientes inactivos -->
+                    <a class="nav-link" href="{% url 'HistorialPagos' %}?user={{user}}">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <a href="{% url 'cerrarsesion' %}">
+                            <button class="btn btn-secondary">Cerrar Sesión</button>
+                        </a>
+                    </a>
+                </li>
+    
+            </ul>
 
 
 
@@ -114,11 +96,13 @@
       <div class="container">
         <div class="contenedor">
           <form method="post" action="{{ url }}">
-            <h1>Confimracion de Pago</h1>
-            <h3>Rut a pagar:</h3>
-            <p>{{rut}}</p>
+            <h1>Confirmacion de Pago</h1>
+            <h3>Numero de cuenta a Pagar:</h3>
+            <p>{{cuenta.Codigo}}</p>
+            <h3>Nombre del cliente:</h3>
+            <p>{{cuenta.NombreAS}}</p>
             <h3>Monto a pagar:</h3>
-            <p>${{pago}}</p>
+            <p>${{cuenta.Monto}}</p>
             <input name="token_ws" value="{{ token }}" hidden />
             <input type="submit" value="Ir a pagar" class="btn btn-secondary"/>
             <br>

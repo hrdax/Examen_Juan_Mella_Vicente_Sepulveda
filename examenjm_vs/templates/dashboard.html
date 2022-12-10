@@ -31,7 +31,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'index'%}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'dashboard'%}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -43,7 +43,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{% url 'index'%}">
+                <a class="nav-link" href="{% url 'dashboard'%}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -96,13 +96,34 @@
                 </a>
             </li>
 
+            
+            <!-- <hr class="sidebar-divider">
+
+            <li class="nav-item">
+                cambiar ver clientes inactivos 
+                <a class="nav-link" href="{% url 'Pagos' %}">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Metodos de pago</span>
+                </a>
+            </li> -->
+
             <hr class="sidebar-divider">
 
             <li class="nav-item">
                 <!-- cambiar ver clientes inactivos -->
-                <a class="nav-link" href="{% url 'Pagos' %}">
+                <a class="nav-link" href="{% url 'vcrearcuenta' %}">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Metodos de pago</span>
+                    <span>Crear Cargo</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <!-- cambiar ver clientes inactivos -->
+                <a class="nav-link" href="{% url 'HistorialPagos' %}?user={{user}}">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <a href="{% url 'cerrarsesion' %}">
+                        <button class="btn btn-secondary">Cerrar Sesión</button>
+                    </a>
                 </a>
             </li>
 

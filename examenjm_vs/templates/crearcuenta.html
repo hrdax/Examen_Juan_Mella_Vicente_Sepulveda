@@ -21,8 +21,9 @@
     <link href="{% static 'css/sb-admin-2.min.css'%}" rel="stylesheet">
 
 </head>
+<body>
 
-<body id="page-top">
+
     <!-- dashboard -->
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -133,49 +134,43 @@
 
         <!-- desde aqui se pone lo demas formulario, vistas, etc. para que no quede invisible -->
 
+        <div class="container">
+            <h1>Gestion de Deudas</h1>
+            <h2>Crear Cargo Monetario</h2>
 
-        <div class="card-body">
-            <h1>Listado de clientes</h1>
-            <form action="{% url 'filtrarsector' %}" method="POST">
+        
+            <form action="{% url 'crearcuenta' %}" method="POST">
                 {% csrf_token %}
-                <label for="sectorid">Filtro Sector</label>
-                <select name="sectorid" id="sectorid">
-                <option selected disabled>Cualquier Sector</option>
-                {% for sectores in sector %}
-                <option> {{ sectores }} </option>
-                {%endfor%}
-                </select>
-                <input type="text" value="{{ estado }}" name="estadoid" hidden>
-                <button type="submit" class="btn btn-secondary">Filtrar</button>
+                {% if message %}
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                {% endif %}
+
+                <div>
+                    <label for="nombre">Nombre</label>
+                    <select name="nombre" id="nombre">
+                    {% for cliente in clientes %}
+                    <option> {{ cliente.Nombre }} </option>
+                    {%endfor%}
+                    
+                    </select>
+                </div>
+                <br>
+                <div>
+                    <label for="monto">Monto</label>
+                    <br>
+                    <p>$<input type="number" id="monto" name="monto"></p>
+                </div>
+
+
+                <div class="container">
+                    <input type="submit" value="Ingresar" id="ingresarbtn" class="btn btn-secondary">
+                </div>
             </form>
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>Rut</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Sector</th>
-                        <th>Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for clientes in clientes %}
-                        <tr>
-                        <td>{{ clientes.Rut }}</td>
-                        <td>{{ clientes.Nombre }}</td>
-                        <td>{{ clientes.Apellido }}</td>
-                        <td>{{ clientes.sector }}</td>
-                        <td>{{ clientes.estado }}</td>
-                        <td><a href="{% url 'vmodificarcliente' %}?rut={{ clientes.Rut }}"><button class="btn btn-secondary">Modificar</button></a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
         </div>
 
     </div>
     <!-- FIN dashboard -->
-
 </body>
-
 </html>

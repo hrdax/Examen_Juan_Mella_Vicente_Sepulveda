@@ -19,7 +19,6 @@
 
     <!-- Custom styles for this template-->
     <link href="{% static 'css/sb-admin-2.min.css'%}" rel="stylesheet">
-    <link href="{% static 'css/styles.css'%}" rel="stylesheet">
 
 </head>
 
@@ -92,23 +91,31 @@
     
             </ul>
 
-        <!-- desde aqui se pone lo demas formulario, vistas, etc. para que no quede invisible -->
+        
 
-        <div class="container">
-            <center>
-                <h1>BOLETA</h1>
-            </center>
-            <div class="boleta">
-                <div style="text-align:center;">
-                    <div class="form-group">
-                        <label>Numero de transaccion</label>
-                        <p>
-                            <b>{{TBK_NUM_TRANSACCION}}</b>
-                        </p>
-                        <a href="{% url 'clientedashboard' %}?user={{user}}"><button class="btn btn-secondary">Volver</button></a>
-                    </div>
-                </div>
-            </div>
+        <div class="card-body">
+            <h1>Listado de Pagos</h1>
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Nombre Asociado</th>
+                        <th>Monto</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for hpago in hpagos %}
+                        <tr>
+                        <td>{{ hpago.Codigo }}</td>
+                        <td>{{ hpago.NombreAS }}</td>
+                        <td>{{ hpago.Monto }}</td>
+                        <td>{{ hpago.Estado }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
 
     </div>
