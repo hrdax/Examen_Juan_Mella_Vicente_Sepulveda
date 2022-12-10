@@ -18,10 +18,12 @@ class Cuenta(models.Model):
     Codigo=models.BigIntegerField()
     NombreAS=models.CharField(max_length=50)
     Monto=models.BigIntegerField()
+    Token=models.CharField(max_length=1000)
 
 class Historialdepagos(models.Model):
     Codigo=models.BigIntegerField()
     NombreAS=models.CharField(max_length=50)
     Monto=models.BigIntegerField()
     Estado=models.CharField(max_length=50)
+    Token=models.CharField(max_length=1000)
 
