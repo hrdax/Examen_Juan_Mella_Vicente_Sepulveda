@@ -7,3 +7,21 @@ class Cliente(models.Model):
     Apellido=models.CharField(max_length=50)
     sector=models.CharField(max_length=50)
     estado=models.CharField(max_length=50)
+
+
+class Usuario(models.Model):
+    Nombre=models.CharField(max_length=50)
+    Contrasena=models.CharField(max_length=50)
+    Rol = models.IntegerField()
+
+class Cuenta(models.Model):
+    Codigo=models.BigIntegerField()
+    NombreAS=models.CharField(max_length=50)
+    Monto=models.BigIntegerField()
+
+class Historialdepagos(models.Model):
+    Codigo=models.BigIntegerField()
+    NombreAS=models.CharField(max_length=50)
+    Monto=models.BigIntegerField()
+    Estado=models.CharField(max_length=50)
+

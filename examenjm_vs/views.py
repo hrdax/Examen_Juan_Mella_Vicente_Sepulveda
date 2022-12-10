@@ -3,6 +3,7 @@ from examenjm_vs.models import *
 from random import randint
 from transbank.webpay.webpay_plus.transaction import Transaction
 
+
 # Create your views here.
 
 # lista secotres
@@ -18,12 +19,35 @@ sectores=["Colbún"
 # lista estados
 estados=["activo","inactivo"]
 
-# NO TOCAR INDEX
-def index(request):
+def dashboard(request):
     return render(request, 'dashboard.html')
 
+def vlogin(request):
+    return render(request, 'login.html')
+
+def login(request):
+    #obtiene el nombre de usuario y la contraseña desde el formulario
+    user = request.POST['user']
+    password = request.POST['pass']
+
+    try :
+        #obtiene el usuario de la base de datos
+        usuario = Usuario.objects.get(Nombre=user)
+        
+    except:
+        return render(request,'login.html', {'message':'Usuario o contraseña incorrectos'})
+
+    if user == usuario.Nombre and password == usuario.Contrasena and usuario.Rol == 1:
+            return render(request, 'dashboard.html')
+    elif user == usuario.Nombre and password == usuario.Contrasena and usuario.Rol == 2:
+
+        return render(request, 'clientedashboard.html',{"user":user})
+    else:
+        return render(request,'login.html', {'message':'Usuario o contraseña incorrectos'})
+
 def vcrearcliente(request):
-    return render(request, 'vcrearcliente.html',{"sector":sectores,"estado":estados})
+    usuarios = Usuario.objects.filter(Rol=2)
+    return render(request, 'vcrearcliente.html',{"sector":sectores,"estado":estados,"usuarios":usuarios})
 
 def filtrosectores(request):
     return render(request, 'filtroporsectores.html')
@@ -171,15 +195,58 @@ def Pagos(request):
 #crea la transaccion y redirige en caso de exito
 def webpay(request):
     #obtiene el rut y el monto a pagar
-    pago = request.POST['tpago']
-    rutapagar = request.POST['rutid']
+    ccodigo = request.GET['Codigo']
+
+    cuenta = Cuenta.objects.get(Codigo=ccodigo)
+
     #crea la transaccion
-    resp = (Transaction()).create(str(randint(10,100000)), str(randint(10,100000)), float(pago), "http://localhost:8000/examenjm_vs/transaccioncompleta")
+    resp = (Transaction()).create(str(randint(10,100000)), str(randint(10,100000)), float(cuenta.Monto), "http://localhost:8000/examenjm_vs/transaccioncompleta")
 
     #redirige a confirmar pago donde evia el monto a pagar tambien la url y el token devuelto por parte de transbank
-    return render(request, "confirmarpago.html",{"token":resp['token'], "url":resp['url'], "rut":rutapagar, "pago":pago})
+    return render(request, "confirmarpago.html",{"token":resp['token'], "url":resp['url'], "cuenta":cuenta})
 
 #redirige a la pagina de pago realizado en caso de se haya hecho el pago con un N de transaccion aleatorio
 def transaccioncompleta(request):
 
+    ccodigo = request.GET['Codigo']
+    cuenta = Cuenta.objects.get(Codigo=ccodigo)
+
+    phistorial = Historialdepagos(Codigo=cuenta.Codigo,NombreAS=cuenta.NombreAS,Monto=cuenta.Monto,Estado="Pagado")
+    phistorial.save()
+
     return render(request, "pagorealizado.html",{ "TBK_NUM_TRANSACCION": randint(30,1000000)})
+
+def VerCuentas(request):
+    
+    user = request.GET['user']
+
+    cuenta = Cuenta.objects.filter(NombreAS=user)
+    #envia todos los clientes al spinner de pago
+    return render(request, "VerCuentas.html",{"cuentas":cuenta})
+
+def HistorialPagos(request):
+    #hace un select a todos los clientes
+    clientes = Cliente.objects.all()
+    #envia todos los clientes al spinner de pago
+    return render(request, "HistorialPagos.html",{"ruts":clientes})
+
+def vcrearcuenta(request):
+    clientes = Cliente.objects.all()
+    return render(request, "crearcuenta.html",{"clientes":clientes})
+
+def crearcuenta(request):
+
+    try:
+        clientes = Cliente.objects.all()
+        codigo = randint(10,100000)
+        nombre = request.POST['nombre']
+        monto = request.POST['monto']
+
+        cuenta = Cuenta(Codigo=codigo,NombreAS=nombre,Monto=monto)
+        cuenta.save()
+        return render(request, "crearcuenta.html",{"clientes":clientes})
+    except:
+        return render(request, "crearcuenta.html",{"message","Error al crear la cuenta"})
+
+
+    

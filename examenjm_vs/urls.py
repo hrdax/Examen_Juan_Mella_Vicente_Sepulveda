@@ -2,8 +2,10 @@ from django.urls import path
 from .import views
 
 urlpatterns = [
+    path('dashboard', views.dashboard, name='dashboard'),
     path('filtrosectores', views.filtrosectores, name='filtrosectores'),
-    path('', views.index, name='index'),
+    path('', views.vlogin, name='vlogin'),
+    path('login', views.login, name='login'),
     path('crearcliente', views.crearcliente, name='crearcliente'),
     path('vcrearcliente', views.vcrearcliente, name='vcrearcliente'),
     path('listadoclientes', views.verclientes, name='verclientes'),
@@ -17,4 +19,8 @@ urlpatterns = [
     path('Pagos', views.Pagos, name='Pagos'),
     path('webpay', views.webpay, name='webpay'),
     path('transaccioncompleta', views.transaccioncompleta, name='transaccioncompleta'),
+    path('VerCuentas', views.VerCuentas, name='VerCuentas'),
+    path('HistorialPagos', views.HistorialPagos, name='HistorialPagos'),
+    path('vcrearcuenta', views.vcrearcuenta, name='vcrearcuenta'),
+    path('crearcuenta', views.crearcuenta, name='crearcuenta'),
 ]
