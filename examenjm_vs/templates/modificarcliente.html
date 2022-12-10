@@ -66,6 +66,7 @@
                 </a>
             </li>
 
+
             <hr class="sidebar-divider">
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -89,23 +90,56 @@
             <hr class="sidebar-divider">
 
             <li class="nav-item">
+                <!-- cambiar ver clientes inactivos -->
                 <a class="nav-link" href="{% url 'verclientes_inac' %}">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Ver clientes inactivos</span>
                 </a>
             </li>
 
-            <hr class="sidebar-divider">
+            
+            <!-- <hr class="sidebar-divider">
 
             <li class="nav-item">
-                <!-- cambiar ver clientes inactivos -->
+                cambiar ver clientes inactivos 
                 <a class="nav-link" href="{% url 'Pagos' %}">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Metodos de pago</span>
                 </a>
+            </li> -->
+
+            <hr class="sidebar-divider">
+
+            <li class="nav-item">
+                <!-- cambiar ver clientes inactivos -->
+                <a class="nav-link" href="{% url 'vcrearcuenta' %}">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Crear Cargo</span>
+                </a>
             </li>
-            
+
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link" href="../admin/">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Administracion</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <!-- cambiar ver clientes inactivos -->
+                <a class="nav-link" href="{% url 'HistorialPagos' %}?user={{user}}">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <a href="{% url 'cerrarsesion' %}">
+                        <button class="btn btn-secondary">Cerrar Sesión</button>
+                    </a>
+                </a>
+            </li>
+
         </ul>
+
 
         <!-- desde aqui se pone lo demas formulario, vistas, etc. para que no quede invisible -->
         <div class="container">
