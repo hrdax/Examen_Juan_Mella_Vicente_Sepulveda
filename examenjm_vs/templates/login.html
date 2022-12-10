@@ -29,12 +29,11 @@
             
             <form action="{% url 'login' %}" method="POST">
                 {% if message %}
-                        <div class="alert alert-danger" role="alert">
-                            {{ message }}
-                        </div>
-                    {% endif %}
-                <h1>Gestion de usuario</h1>
-                <h2>Crear Cliente</h2>
+                    <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                    </div>
+                {% endif %}
+                <h1>Login</h1>
                 {% csrf_token %}
                 <div>   
                     <label for="user">Usuario</label>

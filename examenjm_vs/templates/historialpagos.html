@@ -91,11 +91,10 @@
     
             </ul>
 
-
         
 
         <div class="card-body">
-            <h1>Listado de cuentas</h1>
+            <h1>Listado de Pagos</h1>
 
             <table class="table table-bordered table-striped">
                 <thead>
@@ -103,15 +102,16 @@
                         <th>Codigo</th>
                         <th>Nombre Asociado</th>
                         <th>Monto</th>
+                        <th>Estado</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for cuenta in cuentas %}
+                    {% for hpago in hpagos %}
                         <tr>
-                        <td>{{ cuenta.Codigo }}</td>
-                        <td>{{ cuenta.NombreAS }}</td>
-                        <td>{{ cuenta.Monto }}</td>
-                        <td><a href="{% url 'webpay' %}?Codigo={{ cuenta.Codigo }}"><button class="btn btn-secondary">Pagar</button></a></td>
+                        <td>{{ hpago.Codigo }}</td>
+                        <td>{{ hpago.NombreAS }}</td>
+                        <td>{{ hpago.Monto }}</td>
+                        <td>{{ hpago.Estado }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

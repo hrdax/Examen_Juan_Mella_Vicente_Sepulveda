@@ -66,6 +66,7 @@
                 </a>
             </li>
 
+
             <hr class="sidebar-divider">
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -89,32 +90,62 @@
             <hr class="sidebar-divider">
 
             <li class="nav-item">
+                <!-- cambiar ver clientes inactivos -->
                 <a class="nav-link" href="{% url 'verclientes_inac' %}">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Ver clientes inactivos</span>
                 </a>
             </li>
 
+            
+            <!-- <hr class="sidebar-divider">
+
+            <li class="nav-item">
+                cambiar ver clientes inactivos 
+                <a class="nav-link" href="{% url 'Pagos' %}">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Metodos de pago</span>
+                </a>
+            </li> -->
+
             <hr class="sidebar-divider">
 
             <li class="nav-item">
                 <!-- cambiar ver clientes inactivos -->
-                <a class="nav-link" href="{% url 'Pagos' %}">
+                <a class="nav-link" href="{% url 'vcrearcuenta' %}">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Metodos de pago</span>
+                    <span>Crear Cargo</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <!-- cambiar ver clientes inactivos -->
+                <a class="nav-link" href="{% url 'HistorialPagos' %}?user={{user}}">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <a href="{% url 'cerrarsesion' %}">
+                        <button class="btn btn-secondary">Cerrar Sesión</button>
+                    </a>
                 </a>
             </li>
 
         </ul>
 
+
+
         <!-- desde aqui se pone lo demas formulario, vistas, etc. para que no quede invisible -->
+
         <div class="container">
-            <h1>Gestion de usuario</h1>
-            <h2>Crear Cliente</h2>
+            <h1>Gestion de Deudas</h1>
+            <h2>Crear Cargo Monetario</h2>
 
         
             <form action="{% url 'crearcuenta' %}" method="POST">
                 {% csrf_token %}
+                {% if message %}
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                {% endif %}
 
                 <div>
                     <label for="nombre">Nombre</label>
@@ -129,7 +160,7 @@
                 <div>
                     <label for="monto">Monto</label>
                     <br>
-                    <input type="number" id="monto" name="monto">
+                    <p>$<input type="number" id="monto" name="monto"></p>
                 </div>
 
 

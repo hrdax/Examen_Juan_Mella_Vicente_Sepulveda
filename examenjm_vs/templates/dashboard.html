@@ -96,15 +96,16 @@
                 </a>
             </li>
 
-            <hr class="sidebar-divider">
+            
+            <!-- <hr class="sidebar-divider">
 
             <li class="nav-item">
-                <!-- cambiar ver clientes inactivos -->
+                cambiar ver clientes inactivos 
                 <a class="nav-link" href="{% url 'Pagos' %}">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Metodos de pago</span>
                 </a>
-            </li>
+            </li> -->
 
             <hr class="sidebar-divider">
 
@@ -112,7 +113,17 @@
                 <!-- cambiar ver clientes inactivos -->
                 <a class="nav-link" href="{% url 'vcrearcuenta' %}">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Crear Cuenta</span>
+                    <span>Crear Cargo</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <!-- cambiar ver clientes inactivos -->
+                <a class="nav-link" href="{% url 'HistorialPagos' %}?user={{user}}">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <a href="{% url 'cerrarsesion' %}">
+                        <button class="btn btn-secondary">Cerrar Sesión</button>
+                    </a>
                 </a>
             </li>
 
