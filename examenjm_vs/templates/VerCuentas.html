@@ -1,0 +1,114 @@
+{% load static %}
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ExamenJMVS</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'css/all.min.min.css'%}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{% static 'css/sb-admin-2.min.css'%}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+    <body id="page-top">
+        <!-- dashboard -->
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+    
+            <!-- Sidebar -->
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'dashboard'%}">
+                    <div class="sidebar-brand-icon rotate-n-15">
+                        <i class="fas fa-laugh-wink"></i>
+                    </div>
+                    <div class="sidebar-brand-text mx-3">ExamenJMVS</div>
+                </a>
+    
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0">
+    
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'dashboard'%}">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
+                </li>
+    
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+    
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Interface
+                </div>
+    
+                <hr class="sidebar-divider">
+    
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'VerCuentas' %}">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Ver Cuentas</span>
+                    </a>
+                </li>
+    
+                <hr class="sidebar-divider">
+    
+                <li class="nav-item">
+                    <!-- cambiar ver clientes inactivos -->
+                    <a class="nav-link" href="{% url 'HistorialPagos' %}">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Historial Pagos</span>
+                    </a>
+                </li>
+    
+            </ul>
+
+
+        
+
+        <div class="card-body">
+            <h1>Listado de cuentas</h1>
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Nombre Asociado</th>
+                        <th>Monto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cuenta in cuentas %}
+                        <tr>
+                        <td>{{ cuenta.Codigo }}</td>
+                        <td>{{ cuenta.NombreAS }}</td>
+                        <td>{{ cuenta.Monto }}</td>
+                        <td><a href="{% url 'webpay' %}?Codigo={{ cuenta.Codigo }}"><button class="btn btn-secondary">Pagar</button></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <!-- FIN dashboard -->
+
+</body>
+
+</html>

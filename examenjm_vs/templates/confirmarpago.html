@@ -31,7 +31,7 @@
       <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
           <!-- Sidebar - Brand -->
-          <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'index'%}">
+          <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'dashboard'%}">
               <div class="sidebar-brand-icon rotate-n-15">
                   <i class="fas fa-laugh-wink"></i>
               </div>
@@ -43,7 +43,7 @@
 
           <!-- Nav Item - Dashboard -->
           <li class="nav-item active">
-              <a class="nav-link" href="{% url 'index'%}">
+              <a class="nav-link" href="{% url 'dashboard'%}">
                   <i class="fas fa-fw fa-tachometer-alt"></i>
                   <span>Dashboard</span></a>
           </li>
@@ -114,11 +114,13 @@
       <div class="container">
         <div class="contenedor">
           <form method="post" action="{{ url }}">
-            <h1>Confimracion de Pago</h1>
-            <h3>Rut a pagar:</h3>
-            <p>{{rut}}</p>
+            <h1>Confirmacion de Pago</h1>
+            <h3>Numero de cuenta a Pagar:</h3>
+            <p>{{cuenta.Codigo}}</p>
+            <h3>Nombre del cliente:</h3>
+            <p>{{cuenta.NombreAS}}</p>
             <h3>Monto a pagar:</h3>
-            <p>${{pago}}</p>
+            <p>${{cuenta.Monto}}</p>
             <input name="token_ws" value="{{ token }}" hidden />
             <input type="submit" value="Ir a pagar" class="btn btn-secondary"/>
             <br>

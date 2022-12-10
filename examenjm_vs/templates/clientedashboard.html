@@ -56,33 +56,13 @@
                 Interface
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <!--Aqui le pones la url en href-->
-                <a class="nav-link" href="{% url 'vcrearcliente' %}">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Crear cliente</span>
-                </a>
-            </li>
-
-
             <hr class="sidebar-divider">
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'verallclientes' %}">
+                <a class="nav-link" href="{% url 'VerCuentas' %}?user={{ user }}">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Ver todos los clientes</span>
-                </a>
-            </li>
-
-            <hr class="sidebar-divider">
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'verclientes_ac' %}">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Ver clientes activos</span>
+                    <span>Ver Cuentas</span>
                 </a>
             </li>
 
@@ -90,29 +70,9 @@
 
             <li class="nav-item">
                 <!-- cambiar ver clientes inactivos -->
-                <a class="nav-link" href="{% url 'verclientes_inac' %}">
+                <a class="nav-link" href="{% url 'HistorialPagos' %}">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Ver clientes inactivos</span>
-                </a>
-            </li>
-
-            <hr class="sidebar-divider">
-
-            <li class="nav-item">
-                <!-- cambiar ver clientes inactivos -->
-                <a class="nav-link" href="{% url 'Pagos' %}">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Metodos de pago</span>
-                </a>
-            </li>
-
-            <hr class="sidebar-divider">
-
-            <li class="nav-item">
-                <!-- cambiar ver clientes inactivos -->
-                <a class="nav-link" href="{% url 'vcrearcuenta' %}">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Crear Cuenta</span>
+                    <span>Historial Pagos</span>
                 </a>
             </li>
 
