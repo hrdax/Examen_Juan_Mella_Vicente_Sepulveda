@@ -22,3 +22,6 @@ migrar el modelo con
 1. python manage.py makemigrations
 
 2. python manage.py migrate
+
+Crear un usuario admin con rol 1 en la tabla de usuarios
+Crear 1 o mas usuarios "cliente" con rol 2 en la tabla de usuario
