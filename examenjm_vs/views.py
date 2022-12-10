@@ -19,6 +19,15 @@ sectores=["Colbún"
 # lista estados
 estados=["activo","inactivo"]
 
+def clientedashboard(request):
+
+    user = request.GET['user']
+
+    return render(request, 'clientedashboard.html',{"user":user})
+
+def cerrarsesion(request):
+    return render(request, 'login.html')
+
 def dashboard(request):
     return render(request, 'dashboard.html')
 
@@ -202,19 +211,32 @@ def webpay(request):
     #crea la transaccion
     resp = (Transaction()).create(str(randint(10,100000)), str(randint(10,100000)), float(cuenta.Monto), "http://localhost:8000/examenjm_vs/transaccioncompleta")
 
+    cuenta.Token = resp['token']
+    cuenta.save()
+
+
     #redirige a confirmar pago donde evia el monto a pagar tambien la url y el token devuelto por parte de transbank
-    return render(request, "confirmarpago.html",{"token":resp['token'], "url":resp['url'], "cuenta":cuenta})
+    return render(request, "confirmarpago.html",{"token":resp['token'], "url":resp['url'], "cuenta":cuenta,"user":cuenta.NombreAS})
 
 #redirige a la pagina de pago realizado en caso de se haya hecho el pago con un N de transaccion aleatorio
 def transaccioncompleta(request):
 
-    ccodigo = request.GET['Codigo']
-    cuenta = Cuenta.objects.get(Codigo=ccodigo)
+    token = request.GET['token_ws']
 
-    phistorial = Historialdepagos(Codigo=cuenta.Codigo,NombreAS=cuenta.NombreAS,Monto=cuenta.Monto,Estado="Pagado")
+    cuenta = Cuenta.objects.get(Token=token)
+
+    phistorial = Historialdepagos(Codigo=cuenta.Codigo,NombreAS=cuenta.NombreAS,Monto=cuenta.Monto,Estado="Pagado",Token=token)
     phistorial.save()
 
-    return render(request, "pagorealizado.html",{ "TBK_NUM_TRANSACCION": randint(30,1000000)})
+    phistorial = Historialdepagos.objects.filter(NombreAS=cuenta.NombreAS)
+    cuenta.delete()
+
+    
+    for phistorial in phistorial:
+
+        user = phistorial.NombreAS
+
+    return render(request, "pagorealizado.html",{ "TBK_NUM_TRANSACCION": randint(30,1000000), "user":user})
 
 def VerCuentas(request):
     
@@ -222,13 +244,14 @@ def VerCuentas(request):
 
     cuenta = Cuenta.objects.filter(NombreAS=user)
     #envia todos los clientes al spinner de pago
-    return render(request, "VerCuentas.html",{"cuentas":cuenta})
+    return render(request, "VerCuentas.html",{"cuentas":cuenta,"user":user})
 
 def HistorialPagos(request):
+    user = request.GET['user']
     #hace un select a todos los clientes
-    clientes = Cliente.objects.all()
+    hpago = Historialdepagos.objects.filter(NombreAS=user)
     #envia todos los clientes al spinner de pago
-    return render(request, "HistorialPagos.html",{"ruts":clientes})
+    return render(request, "HistorialPagos.html",{"hpagos":hpago,"user":user})
 
 def vcrearcuenta(request):
     clientes = Cliente.objects.all()
@@ -242,9 +265,9 @@ def crearcuenta(request):
         nombre = request.POST['nombre']
         monto = request.POST['monto']
 
-        cuenta = Cuenta(Codigo=codigo,NombreAS=nombre,Monto=monto)
+        cuenta = Cuenta(Codigo=codigo,NombreAS=nombre,Monto=monto,Token="")
         cuenta.save()
-        return render(request, "crearcuenta.html",{"clientes":clientes})
+        return render(request, "crearcuenta.html",{"clientes":clientes,"message":"Cargo monetario creado con exito"})
     except:
         return render(request, "crearcuenta.html",{"message","Error al crear la cuenta"})
 
